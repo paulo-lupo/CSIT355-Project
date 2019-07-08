@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+  </head>
+
+  <body>
+    
+    <form action='login.php' method='post' class="modal-content animate">
+      <div class="container">
+        <h1>Log In</h1> 
+        <label for="uname"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="username" 
+        required oninvalid="this.setCustomValidity('Please enter an Username')" oninput="setCustomValidity('')">
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="password"
+        required oninvalid="this.setCustomValidity('Please enter a password')" oninput="setCustomValidity('')">
+          
+        <button type="submit">Login</button>
+      </div>
+    </form>
+  </body>
+</html>
+
