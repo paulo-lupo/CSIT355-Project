@@ -363,10 +363,14 @@ body {
   padding:10px;
 }
 .cell{
+ 
   min-height:75px;
   flex-grow:1;
   flex-basis:100%;
+  
 }
+
+
 .tab{
   text-decoration:none;
   color:inherit;
@@ -388,13 +392,40 @@ body {
 #itbv3j{
   flex-basis:11.6%;
 }
-#ievkbj{
-  flex-basis:80.6%;
-}
+
 .checkbox{
   display:inline;
   position:static;
 }
+
+#prod {
+  width: 500px;
+  height: 350px;
+  padding: 10px;
+}
+
+.item{
+  display: inline;
+  text-align: center;
+}
+
+.item-button {
+  text-align:center;
+}
+
+button {
+  background-color: Transparent;
+  background-repeat:no-repeat;
+  border: none;
+  cursor:pointer;
+  overflow: hidden;
+  outline:none;
+}
+.cent {
+  text-align: center;
+
+}
+
 #iydxgg{
   color:black;
   margin:15px 15px 15px 15px;
@@ -479,3 +510,5 @@ body {
   zoom: 1.5;
   -moz-transform: scale(1.5);
 }
+
+
