@@ -22,7 +22,7 @@
           </a>
         </div>
 
-        <a href="#">
+        <a href="cart.php">
           <div id="contactMe" class="menu-item">Cart
           </div>
         </a>

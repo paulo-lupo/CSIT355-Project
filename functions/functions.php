@@ -5,8 +5,7 @@ $connection = mysqli_connect("cyan", "dossapau", "Abestado.123", "dossapau_carlo
 function cart() {
   if(isset($_GET['cart'])) {
     $prod_id= $_GET['cart'];
-
-   
+    
   }
 
 }
@@ -64,7 +63,7 @@ function getProducts() {
 
         echo "<div id='single_prod'>
         <h2>$prod_name</h2>
-        <img src='./pictures/$prod_image' width='450' height='350'>
+        <img src='./pictures/$prod_image' width='360' height='240'>
         <p></p>
         <a href='details.php?prod_id=$prod_id' ><button type='button'>Details</button></a>
 
@@ -92,7 +91,7 @@ function getProducts() {
 
       echo "<div id='single_prod'>
       <h2>$prod_name</h2>
-      <img src='./pictures/$prod_image' width='500' height='350'>
+      <img src='./pictures/$prod_image' width='360' height='240'>
       <p></p>
       <a href='details.php?prod_id=$prod_id' ><button type='button'>Details</button></a>
 
@@ -130,7 +129,7 @@ function getSearch() {
 
       echo "<div id='single_prod'>
       <h2>$prod_name</h2>
-      <img src='./pictures/$prod_image' width='500' height='350'>
+      <img src='./pictures/$prod_image' width='360' height='240'>
       <p></p>
       <a href='details.php?prod_id=$prod_id' ><button type='button'>Details</button></a>
 

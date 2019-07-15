@@ -26,7 +26,7 @@
         </a>
         </div>
 
-        <a href="#">
+        <a href="cart.php">
         <div id="contactMe" class="menu-item">Cart
         </div>
         </a>
@@ -73,6 +73,13 @@
                     $tag_array = mysqli_fetch_array($run_tag);
                     $tag = $tag_array['tag_name'];
 
+                    $ip = getIP();
+
+                    $get_cart_items = "select * from Cart where ip_add='$ip' and prod_id=$prod_id";
+                    $cart_items = mysqli_fetch_array(mysqli_query($connection, $get_cart_items));
+
+                    $quantity = $prod_quantity - $cart_items['quantity'];
+
                     echo "<div id='details_prod'>
                             <h2>$prod_name</h2>
                             <img src='./pictures/$prod_image' width='1000' height='700'>               
@@ -85,7 +92,7 @@
                                     <option value='0' selected disabled>-- Select a quantity--</option>"; 
 
                                                 
-                                    for($i=1; $i <=$prod_quantity; $i++) {
+                                    for($i=1; $i <=$quantity; $i++) {
                                         echo "<option value='$i'>$i</option>";
                                     }
                                     
@@ -112,17 +119,35 @@
         $ip_add = getIP();
         $product_quantity=$_POST['product_quantity'];
 
-        $insert_product = "INSERT INTO Cart (prod_id, ip_add, quantity)
-          values ('$product_id','$ip_add','$product_quantity')";
+        $ip = getIP();
 
-        $insert_query = mysqli_query($connection, $insert_product);
+        $get_cart_items = "select * from Cart where ip_add='$ip'";
+        $run_cart_items = mysqli_query($connection, $get_cart_items);
 
-        if($insert_query){
-            echo "<script>alert('The product was added to your cart. \\nVisit your cart when you are ready to checkout')</script>";
-        }
-        else{
-            echo "<script>alert('failed')</script>"; 
+        $semaphore = 0;
+        while($row_cart_items = mysqli_fetch_array($run_cart_items)) {
+            if($product_id == $row_cart_items['prod_id']) {
+                $new_total = $row_cart_items['quantity'] + $product_quantity;
+                $update_query = "update `Cart` SET `quantity` = '$new_total' WHERE `ip_add`='$ip' AND `prod_id`=$product_id";
+                $run_query = mysqli_query($connection, $update_query);
+                $semaphore = 1;
+                break;
+            }
         };
 
+        if ($semaphore == 0) {
+            $insert_product = "INSERT INTO Cart (prod_id, ip_add, quantity)
+            values ('$product_id','$ip_add','$product_quantity')";
+  
+          $insert_query = mysqli_query($connection, $insert_product);
+  
+          if($insert_query){
+              echo "<script>alert('The product was added to your cart. \\nVisit your cart when you are ready to checkout')</script>";
+          }
+          else{
+              echo "<script>alert('failed')</script>"; 
+          };
+        }
+        echo "<meta http-equiv='refresh' content='0'>";
     };
 ?>
