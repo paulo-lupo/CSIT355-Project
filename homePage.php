@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+<!DOCTYPE >
+<?php include("functions/functions.php"); ?>
 <html>
   <head>
     <title>Home - Carlos Martin</title>
@@ -6,6 +7,7 @@
         type = "text/css"
         href = "style.css"/>
       <link href="https://fonts.googleapis.com/css?family=Play&display=swap" rel="stylesheet"> 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   </head>
 
   <body >
@@ -14,7 +16,7 @@
       <!--Creates the logo and links it to the home page-->
       <div class="container-width" >
         <div  class="logo-container">
-          <a href="#">
+          <a href="home.php">
             <div id="logo-button" class="logo">Carlos Martin
             </div>
           </a>
@@ -29,6 +31,7 @@
           <div id="" class="menu-item">Help
           </div>
         </a>
+        
       </div>
     </header>
     
@@ -46,15 +49,27 @@
             <div class="banner-title">Carlos Martin
             </div>
             <div class="banner-description">I am a photographer in the NYC Tri-state area who happily travels the world to photograph architecture and landscapes.
-            </div>
+            <?php getIP(); ?>  
+          </div>
           </div>
         </div>
       </div>
     </section>
-
+  
+   <form action="search.php" method="get" enctype="multipart/form-data">
+      <table align='center' width='600'>
+        <tr>
+            <td><input size='10' type='text' name='user_query' placeholder='Search a product'/></td>
+             <td>
+                <input value='search' name='search' style='text-align: center' type='submit'/>
+             </td>
+        </tr>
+      </table>
+    </form>
 
 
     <section class="flex-sect">
+
       <div data-tabs="1" id="ihnutl">
         <nav data-tab-container="1" class="tab-container">
           <a href="#tab1" data-tab="1" class="tab">Photos</a>
@@ -65,24 +80,11 @@
           <div class="row" id="ie1l4q">
             <div class="cell" id="itbv3j">
               <form class="form">
-                <label><h3>Filters</h3></label>
-                <label><strong>Type</strong></label>
-                <div class="form-group">
-                  <input type="checkbox" class="checkbox"/>
-                  <label class="label">Architecture</label>
-                </div>
-                <div class="form-group">
-                  <input type="checkbox" class="checkbox"/>
-                  <label class="label">Interiors</label>
-                </div>
-                <div class="form-group">
-                  <input type="checkbox" class="checkbox"/>
-                  <label class="label">Landscapes</label>
-                </div>
-                <div class="form-group">
-                  <input type="checkbox" class="checkbox"/>
-                  <label class="label">CityScapes</label>
-                </div>
+                <label ><h2>Filters</h2></label>
+
+                <?php 
+                getTags();
+                ?>
               </form>
               <form class="form">
                   <label><strong>Dimension</strong></label>
@@ -102,14 +104,11 @@
             </div>
            
             <div class="cell" id="ievkbj">
-              <div class='cent'>
-                  <img id="prod" src="./pictures/DG6TzGH_1eY.jpg">
-                  <img id="prod" src="./pictures/A-7HVd0EsgU.jpg"/>
-                  <img id="prod" src="./pictures/9B9nMbOwAME.jpg"/>
-                  <img id="prod" src="./pictures/BvlKMRCeND0.jpg"/>
-                  <img id="prod" src="./pictures/LniT7cNARvQ.jpg"/>
-                  <img id="prod" src="./pictures/C2r95T9CTP4.jpg" />
-              </div>
+
+                <div id="product_box">
+                  <?php getProducts() ?>
+                </div>
+
             </div>
           </div>
         </div>

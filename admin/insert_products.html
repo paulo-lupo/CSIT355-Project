@@ -1,0 +1,113 @@
+<!DOCTYPE html> 
+
+<?php include("include/db.php"); ?>
+<html>
+    <head>
+        <title>
+            Insert Products
+        </title>
+    </head>
+
+    <body bgcolor='blue'>
+        <form action="insert_products.php" method="POST" enctype="multipart/form-data">
+            <table align='center' width='600' border='2px'>
+                <tr align='center'>
+                    <td colspan="8">
+                        <h2>Insert New Photo Here</h2>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Photo name: </td>
+                    <td><input required type='text' name='product_name' size='30'/></td>
+                </tr>
+                <tr>
+                    <td>Photo Description: </td>
+                    <td><textarea type='text' name='product_description'></textarea></td>
+                </tr>
+                <tr>
+                    <td>Initial Quantity: </td>
+                    <td><input required type="number" min="0" placeholder="0" name='product_quantity'></textarea></td>
+                </tr>
+                <tr>
+                        <td>Price: </td>
+                        <td><input required type="number" placeholder="0.00" required name="product_price" min="0" step="0.01" title="Currency" pattern="^\d+(?:\.\d{1,2})?$" ></td>
+                </tr>
+
+                <tr>
+                    <td>Size: </td>
+                    <td>
+                        <select required name='product_size'>
+                                <option value='0' selected disabled>-- Select a size--</option>
+                            <?php 
+                                $get_sizes = "select * from Sizes";
+                                $run_sizes = mysqli_query($connection, $get_sizes);
+                                
+                                while($row = mysqli_fetch_array($run_sizes)) {
+                                    $size_id = $row['size_id'];
+                                    $size = $row['size'];
+                                echo "<option value='$size_id'>$size</option>";
+                                }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tag: </td>
+                    <td>
+                        <select required name='product_tag'>
+                            <option value='0' selected disabled>-- Select a tag --</option>
+                            <?php 
+                                $get_tags = "select * from Tags";
+                                $run_tags = mysqli_query($connection, $get_tags);
+                                
+                                while($row = mysqli_fetch_array($run_tags)) {
+                                    $tag_id = $row['tag_id'];
+                                    $tag_name = $row['tag_name'];
+                                echo "<option value='$tag_id'>$tag_name</option>";
+                                }
+                            ?>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Image: </td>
+                    <td><input required type='file' accept='image/*' name='product_image'/></td>
+                </tr>
+                <tr>
+                        <td>Keywords (for search): </td>
+                        <td><textarea type='text' name='product_keywords'></textarea></td>
+                </tr>
+                <tr align="center">
+                        <td colspan="8"><input type='submit' name='insert_product' value="Add Photo"/></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>
+
+<?php 
+    if(isset($_POST['insert_product'])) {
+        $product_name = $_POST['product_name'];
+        $product_description = $_POST['product_description'];
+        $product_quantity = $_POST['product_quantity'];
+        $product_price = $_POST['product_price'];
+        $product_tag = $_POST['product_tag'];
+        $product_size = $_POST['product_size'];
+        $product_keywords = $_POST['product_keywords'];
+        $product_image = $_FILES['product_image']['name'];
+        $product_image_tmp = $_FILES['product_image']['tmp_name'];
+
+        move_uploaded_file($product_image_tmp, "../pictures/$product_image");
+
+        $insert_product = "INSERT INTO Product (product_name, product_description, product_quantity, product_price, product_size, product_tag, product_image, product_keywords)
+          values ('$product_name','$product_description','$product_quantity','$product_price','$product_size','$product_tag','$product_image', '$product_keywords')";
+
+        $insert_query = mysqli_query($connection, $insert_product);
+
+        if($insert_query){
+            echo "<script>alert('Photo added successfully')</script>";
+            echo "<script>window.open('insert_products.php', '_self')</script>";
+        };
+    };
+?> 

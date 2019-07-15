@@ -413,14 +413,7 @@ body {
   text-align:center;
 }
 
-button {
-  background-color: Transparent;
-  background-repeat:no-repeat;
-  border: none;
-  cursor:pointer;
-  overflow: hidden;
-  outline:none;
-}
+
 .cent {
   text-align: center;
 
@@ -512,3 +505,43 @@ button {
 }
 
 
+#product_box {
+  width: auto;
+  text-align: center;
+  margin: 30px;
+}
+
+#single_prod {
+  
+  float:left;
+  padding: 10px;
+}
+
+#details_prod {
+  text-align: center;
+  width: 1000px;
+  margin:auto;
+}
+
+.tags {
+  text-align: center;
+}
+
+.tags li {
+  list-style: none;
+}
+
+.tags a{
+  color:black; 
+  margin: 20px;
+
+  font-size: 18px;
+}
+
+.tags a:hover {
+  color: red;
+}
+
+label {
+  text-align: center;
+}

@@ -14,7 +14,7 @@
       <!--Creates the logo and links it to the home page-->
       <div class="container-width" >
         <div  class="logo-container">
-          <a href="#">
+          <a href="home.php">
             <div id="logo-button" class="logo">Carlos Martin
             </div>
           </a>
